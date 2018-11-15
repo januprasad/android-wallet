@@ -5,7 +5,7 @@ import org.bitcoinj.crypto.KeyCrypter;
 import org.spongycastle.crypto.params.KeyParameter;
 
 public class HDKeyChain {
-    public HDKeyChain(DeterministicKey rootKey, KeyCrypter keyCrypter, KeyParameter key) {
+    public HDKeyChain(DeterministicKey rootKey) {
 
     }
 }

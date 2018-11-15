@@ -26,10 +26,11 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'org.slf4j:slf4j-nop:1.7.25'
     implementation 'com.android.support:appcompat-v7:28.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.madgag.spongycastle:core:1.51.0.0'
-    implementation files('libs/bitcoinj-core-0.12.3-COINOMI-5.jar')
+    implementation 'org.bitcoinj:bitcoinj-core:0.14.6'
 }
