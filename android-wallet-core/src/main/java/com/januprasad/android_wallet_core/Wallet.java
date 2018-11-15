@@ -2,6 +2,7 @@ package com.januprasad.android_wallet_core;
 
 import android.support.annotation.Nullable;
 
+import org.bitcoinj.crypto.DeterministicHierarchy;
 import org.bitcoinj.crypto.DeterministicKey;
 import org.bitcoinj.crypto.HDKeyDerivation;
 import org.bitcoinj.crypto.MnemonicCode;
@@ -22,7 +23,7 @@ public class Wallet {
     private final LinkedHashMap<String, WalletAccount> accounts;
     private static final int ENTROPY_BITS = 128;
 
-    public Wallet(String mnemonic,String password) throws MnemonicException {
+    public Wallet(String mnemonic, String password) throws MnemonicException {
         this(Utils.parseMnemonic(mnemonic), password);
     }
 
@@ -55,18 +56,17 @@ public class Wallet {
         return entropy;
     }
 
-    private List<String> stringToWords(String mnemonic) {
-        List<String> words = new ArrayList<>();
-        for (String w : mnemonic.trim().split(" ")) {
-            if (w.length() > 0) {
-                words.add(w);
-            }
+    private  DeterministicKey masterKey() {
+        return masterKey;
+    }
+
+    public DeterministicKey getWalletRootKey(CoinType coinType) {
+        if(coinType.name.equalsIgnoreCase(BitCoinParams.get().name))
+        {
+            DeterministicHierarchy hierarchy = new DeterministicHierarchy(masterKey());
+            return hierarchy.get(coinType.getBip44Path(0), false, true);
         }
-        return words;
-    }
 
-    public String masterKey(){
-        return masterKey.serializePrivB58();
+        return null;
     }
-
 }

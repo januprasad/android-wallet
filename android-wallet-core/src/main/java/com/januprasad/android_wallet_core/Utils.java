@@ -20,4 +20,14 @@ public class Utils {
         }
         return sb.toString().trim();
     }
+    public static List<String> stringToWords(String mnemonic) {
+        List<String> words = new ArrayList<>();
+        for (String w : mnemonic.trim().split(" ")) {
+            if (w.length() > 0) {
+                words.add(w);
+            }
+        }
+        return words;
+    }
+
 }
